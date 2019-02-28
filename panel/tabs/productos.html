@@ -1,0 +1,481 @@
+<div class="container">
+    <h1 class="page-header">Productos</h1>
+    <div>
+        <ul class="nav nav-tabs" role="tablist" id="subtab_productos">
+            <li role="presentation">
+                <a href="#productos_agregar" role="tab" data-toggle="tab">Agregar producto</a>
+            </li>
+            <li role="presentation" class="active">
+                <a href="#productos_lista" role="tab" data-toggle="tab">Lista de productos</a>
+            </li>
+        </ul>
+        <div class="tab-content margintop20">
+            <div role="tabpanel" class="tab-pane" id="productos_agregar">
+                <h3>Agregar producto
+                    <small onclick="tourAgregarProducto();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                </h3>
+                <br>
+                <form class="form-horizontal has-feedback" enctype="multipart/form-data" id="form_producto" onsubmit="return false;" style="background:white;">
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label" for="new_producto_nombre">* Nombre:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="new_producto_nombre" name="new_producto_nombre" placeholder="Nombre del producto">
+                            <span class="help-block">Este campo es obligatorio</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label" for="new_producto_categoria">* Categoría:</label>
+                        <div class="col-md-9">
+                            <select id="new_producto_categoria" class="new_subcats form-control" name="new_producto_subcategoria[]"></select>
+                            <span class="help-block">Este campo es obligatorio</span>
+                        </div>
+                    </div>
+                    <div class="form-group row collapse" id="new_producto_subcat_full">
+                        <label class="col-md-3 control-label">Subcategoría:</label>
+                        <div class="col-md-9">
+                            <div class="new_producto_subcat"></div>
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="new_producto_precio">* Precio:</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" id="new_producto_precio" name="new_producto_precio">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                            <label class="col-md-3 control-label" for="new_producto_inv">Artículos en inventario:</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" id="new_producto_inv" name="new_producto_inv">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="new_producto_inventario_min">Artículos mínimos en inventario:</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" id="new_producto_inventario_min" name="new_producto_inventario_min" placeholder="Mínimo">
+                            </div>
+                            <label class="col-md-3 control-label" for="new_producto_inventario_max">Artículos máximos en inventario:</label>
+                            <div class="col-md-3">                                
+                                <input type="text" class="form-control" id="new_producto_inventario_max" name="new_producto_inventario_max" placeholder="Máximo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label" for="new_producto_descripcion">* Descripción:</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="new_producto_descripcion" name="new_producto_descripcion" rows="3"></textarea>
+                            <span class="help-block">Este campo es obligatorio</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label" for="new_producto_disponible">Disponible para su venta online:</label>
+                        <div class="col-md-3">                                       
+                            <select class="form-control" id="new_producto_disponible" name="new_producto_disponible">
+                                <option value="1">Si</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <label class="col-md-3 control-label" for="new_producto_iva">Agregar IVA:</label>
+                        <div class="col-md-3">                                       
+                            <select class="form-control" id="new_producto_iva" name="new_producto_iva">
+                                <option value="1">Si</option>
+                                <option value="0" selected>No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label" for="new_producto_pdf">Adjunta PDF:</label>
+                        <div class="col-md-4">
+                            <input type="file" multiple class="form-control" id="new_producto_pdf" name="new_producto_pdf[]">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="text-muted control-label">Formatos aceptados: .pdf, .doc, .xls</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label" for="Rnew_producto_imagen">Adjunta imágen del producto:</label>
+                        <div class="col-md-4">
+                            <input type="file" multiple class="form-control" id="Rnew_producto_imagen" name="Rnew_producto_imagen[]">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="text-muted control-label">Formatos aceptados: .jpg, .jpeg, .png, .gif</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-3 alignder">
+                            <input type="button" class="btn btn-primary" onclick="agregaProducto();" value="Agrega producto">
+                        </div>
+                        <div class="col-md-3">
+                            <small><i>* Campos obligatorios</i></small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="productos_lista">
+                <h3>Lista de productos
+                    <small onclick="tourListaProductos();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                    <small onclick="actualizaListaProductos();" role="button"><i class="glyphicon glyphicon-refresh"></i></small>
+                </h3>
+                <br>
+                <table id="productos_tabla" class="table table-striped table-hover has-feedback" width="100%" style="background:white;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Categoria</th>
+                            <th>Precio</th>
+                            <th>Precio Outlet</th>
+                            <th>Inventario</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="alert alert-info">
+                    Utiliza el siguiente botón para dar de baja todos los productos en sistema. Esto no afecta el historial de ventas.
+                </div>
+                <p class="text-center">
+                    <button class="btn btn-danger" id="botonBorrarTodo" type="button">Borrar todo</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditaProducto" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">Edita producto</h2>
+            </div>
+            <div class="modal-body project-info">
+                <div id="mensajesEditaProducto"></div>
+                <div class="row">
+                    <form class="form-horizontal has-feedback" id="form_edita_producto" enctype="multipart/form-data">
+                        <input type="hidden" id="editIdProducto" name="editIdProducto" value="-1">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="editProdNombre">* Nombre:</label> 
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="editProdNombre" name="editProdNombre" placeholder="Nombre">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="editProdCategoria">* Categoría:</label>
+                            <div class="col-sm-8">
+                                <select id="editProdCategoria" class="editProdSubcats form-control" name="editProdCategoria[]"></select>
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="form-group collapse" id="editProdSubcat_full">
+                            <label class="col-sm-3 control-label">Subcategoría:</label>
+                            <div class="col-sm-8">
+                                <div class="editProdSubcategoria"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="editProdPrecio">* Precio:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="editProdPrecio" name="editProdPrecio">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                            <label class="col-sm-2 control-label" for="editProdInventario">* Artículos en inventario:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="editProdInventario" name="editProdInventario">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="editProdInventario_max">Artículos máximos en inventario:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="editProdInventario_max" name="editProdInventario_max" placeholder="Máximo">
+                            </div>
+                            <label class="col-sm-2 control-label" for="editProdInventario_min">Artículos mínimos en inventario:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="editProdInventario_min" name="editProdInventario_min" placeholder="Mínimo">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="editProdDescripcion">* Descripción:</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" id="editProdDescripcion" name="editProdDescripcion" rows="3"></textarea>
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="editProdDisponible">Disponible para su venta:</label>
+                            <div class="col-sm-3">                                       
+                                <select class="form-control" id="editProdDisponible" name="editProdDisponible">
+                                    <option value="1">Si</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="editProdIVA">Agregar IVA:</label>
+                            <div class="col-sm-3">                                       
+                                <select class="form-control" id="editProdIVA" name="editProdIVA">
+                                    <option value="1">Si</option>
+                                    <option value="0" selected>No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 alignder">
+                                <input type="button" class="btn btn-primary" onclick="editaProducto();" value="Guardar cambios">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditaInventario" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    Datos de inventario<br>
+                    <small id="tituloModalNombreProductoInventario">Producto fulano</small>
+                </h2>
+            </div>
+            <div class="modal-body project-info">
+                <div id="mensajesEditaInventario"></div>
+                <input type="hidden" id="modalInvProd" value="-1">
+                <ul>
+                    <li>
+                        Artículos en inventario como máximo: <strong id="modalInvProdMax"></strong>
+                    </li>
+                    <li>
+                        Artículos en inventario como mínimo: <strong id="modalInvProdMin"></strong>
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col-md-3 text-right">
+                        <label class="control-label" for="modalInvProdCant">En inventario</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="number" id="modalInvProdCant" class="form-control" name="modalInvProdCant" placeholder="Sólo números">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-success" onclick="finalizarModalInv();"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditaImagenes" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    Edita imágenes del producto<br>
+                    <small id="tituloModalNombreProducto">Producto fulano</small>
+                </h2>
+            </div>
+            <div class="modal-body project-info">
+                <div id="mensajesEditaImagenes"></div>
+                <div class="alert alert-info" role="alert">
+                    <span class="close">&times;</span>
+                    Para ocultar una imagen, haz clic en el ícono <span class="glyphicon glyphicon-eye-open"></span>
+                </div>
+                <div class="row">
+                    <div id="imagenesActuales"></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <form class="form-horizontal has-feedback" id="form_edita_imagenes" enctype="multipart/form-data">
+                        <input type="hidden" id="editImagenIdProducto" name="editImagenIdProducto" value="-1">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="new_producto_imagen">
+                                Adjunta una imágen para el producto:
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="file" multiple class="form-control" id="new_producto_imagen" name="new_producto_imagen[]">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                            <div class="col-sm-5">
+                                <label class="text-muted control-label">Formatos aceptados: .jpg, .jpeg, .png, .gif</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 alignder">
+                                <input type="button" class="btn btn-primary" onclick="agregaImagenes();" value="Agregar imágenes">
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="progress hidden" id="agrega_imagen_progress">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                        Agregando imágenes...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditaArchivos" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    Edita archivos enlazados con el producto<br>
+                    <small id="tituloModalArchivosNombreProducto">Producto fulano</small>
+                </h2>
+            </div>
+            <div class="modal-body project-info">
+                <div id="mensajesEditaArchivos"></div>
+                <div class="alert alert-info" role="alert">
+                    <span class="close">&times;</span>
+                    Para retirar un archivo enlazado, haz clic en el ícono <span class="badge">&times;</span>
+                </div>
+                <div class="row">
+                    <ul id="archivosActuales" class="list-style"></ul>
+                </div>
+                <hr>
+                <div class="row">
+                    <label class="col-sm-3 control-label" for="enlace_archivo">
+                        Escribe el nombre de un archivo y seleccionalo para enlazarlo con el producto
+                    </label>
+                    <div class="form-group col-sm-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="busca_archivo" placeholder="Escribe para buscar...">
+                            <input type="hidden" id="newArchivo_idArchivo">
+                            <input type="hidden" id="newArchivo_url">
+                            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <button class="btn btn-primary form-control" id="boton_enlaza" onclick="enlazaArchivo();" disabled>Enlazar</button>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <form class="form-horizontal has-feedback" id="form_edita_archivos" enctype="multipart/form-data">
+                        <input type="hidden" id="editArchivoIdProducto" name="editArchivoIdProducto" value="-1">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="new_producto_archivo">
+                                Adjunta archivos para el producto:
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="file" multiple class="form-control" id="new_producto_archivo" name="new_producto_archivo[]">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                            <div class="col-sm-5">
+                                <label class="text-muted control-label">Formatos aceptados: .pdf, .doc, .xls</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 alignder">
+                                <input type="button" class="btn btn-primary" onclick="agregaArchivos();" value="Agregar archivos">
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="progress hidden" id="agrega_archivo_progress">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                        Agregando archivos...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEditaOutlet" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    Edición de Outlet<br>
+                    <small id="tituloModalNombreProductoOutlet">Producto fulano</small>
+                </h2>
+            </div>
+            <div class="modal-body project-info">
+                <div id="mensajesEditaOutlet"></div>
+                <input type="hidden" id="editOutletIdProducto" value="-1">
+                <input type="hidden" id="editOutletPrecio" value="-1">
+                <div class="alert alert-info" role="alert">
+                    <span class="close">&times;</span>
+                    Para quitar el precio de Outlet, limpia el campo y guarda
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    Al cambiar el precio de Outlet, los carritos abiertos con este producto verán modificados sus precios.<br>
+                    Los carritos cerrados y entregados con este producto conservaran el precio del momento en que se cierran.
+                </div>
+                <div class="row">
+                    <label class="col-sm-3 col-sm-offset-2 form-group control-label" for="modalPrecioOutlet">
+                        Precio real:
+                    </label>
+                    <div class="col-sm-5 form-group">
+                        <input type="text" class="form-control" id="modalPrecioOutlet" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3 col-sm-offset-2 form-group control-label" for="new_producto_outlet">
+                        Precio Outlet
+                    </label>
+                    <div class="col-sm-5 form-group">
+                        <input type="text" class="form-control" id="new_producto_outlet">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 col-sm-offset-5 form-group">
+                        <select class="form-control" id="select_outlet_descuento"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 form-group">
+                        <input type="button" class="btn btn-primary form-control" onclick="modificaOutlet();" value="Guardar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_creador" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal_creador_titulo"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="modal_creador_mensajes"></div>
+                <input type="hidden" id="modal_creador_llamador" value="-1">
+                <input type="hidden" id="modal_creador_tabla" value="-1">
+                <div class="form-group">
+                    <label for="modal_creador_id" class="control-label">Nombre</label>
+                    <input type="text" class="form-control" id="modal_creador_id">
+                </div>  
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="creaCreador()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

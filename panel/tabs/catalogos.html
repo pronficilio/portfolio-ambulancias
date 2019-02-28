@@ -1,0 +1,278 @@
+<div class="container">
+    <h1 class="page-header">Catalogos</h1>
+    <div id="contenedor_catalogos">
+        <ul class="nav nav-tabs" role="tablist" id="subtab_catalogo">
+            <li role="presentation" class="active">
+                <a href="#catalogo_categorias" role="tab" data-toggle="tab">Categorías</a>
+            </li>
+            <li role="presentation">
+                <a href="#catalogo_subcategorias" role="tab" data-toggle="tab">Subcategorías</a>
+            </li>
+            <li role="presentation">
+                <a href="#catalogo_descuentos" role="tab" data-toggle="tab">Descuentos</a>
+            </li>
+            <li role="presentation">
+                <a href="#catalogo_proveedores" role="tab" data-toggle="tab">Proveedores</a>
+            </li>
+        </ul>
+        <div class="tab-content margintop20">
+            <div role="tabpanel" class="tab-pane active" id="catalogo_categorias">
+                <div class="alert alert-info" role="alert">
+                    <span class="close">&times;</span>
+                    Aquí se guardarán todas las categorías importantes
+                </div>
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <button class="btn btn-primary hover-accion form-control" data-toggle="collapse" data-target="#agregaCategoria">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            <span class="texto-hover-accion">Agregar nuevo elemento</span>
+                        </button>                                            
+                    </div>
+                </div>
+                <div id="agregaCategoria" class="collapse has-feedback">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label for="agregaCat_nombre" class="sr-only">Nombre:</label>
+                            <input type="text" class="form-control" id="agregaCat_nombre" placeholder="Nombre">
+                            <span class="help-block">Este campo es obligatorio</span>
+                        </div>
+                        <div class="col-md-4 text-center form-group">
+                            <button class="btn btn-primary form-control" onclick="agregaCategoria();"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <table id="categoria_tabla" class="table table-striped table-hover has-feedback" width="100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="catalogo_subcategorias">
+                <div class="alert alert-info" role="alert">
+                    <span class="close">&times;</span>
+                    Aquí enlista todas las subcategorías existentes, ¡incluso puedes hacer subcategorías de subcategorías!
+                </div>
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <button class="btn btn-primary hover-accion form-control" data-toggle="collapse" data-target="#agregaSubcategoria">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            <span class="texto-hover-accion">Agregar nuevo elemento</span>
+                        </button>                                            
+                    </div>
+                </div>
+                <div id="agregaSubcategoria" class="collapse has-feedback">
+                    <div class="row">
+                        <div class="col-md-5 form-group">
+                            <label for="agregaSubcat_nombre" class="">Nombre:</label>
+                            <input type="text" class="form-control" id="agregaSubcat_nombre" placeholder="Nombre">
+                            <span class="help-block">Este campo es obligatorio</span>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <label for="select_categoria_subcategoria" class="">Categoría:</label>
+                            <select class="form-control" id="select_categoria_subcategoria"></select>
+                            <span class="help-block">Este campo es obligatorio</span>
+                        </div> 
+                        <div id="subsubcategoria" class="acomodador_subcategorias col-md-5 form-group"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 text-center form-group">
+                            <button class="btn btn-primary form-control" onclick="agregaSubcategoria();"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <table id="subcategoria_tabla" class="table table-striped table-hover has-feedback" width="100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Linaje</th>
+                            <th>Nombre</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+                <div id="arbol" class=""></div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="catalogo_descuentos">
+                
+                <div class="alert alert-info" role="alert">
+                    <span class="close">&times;</span>
+                    Los descuentos son porcentajes que se aplican a los carritos de compra al pagar.
+                </div>
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <button class="btn btn-primary hover-accion form-control" data-toggle="collapse" data-target="#agregaDescuento">
+                            <span class="glyphicon glyphicon-plus-sign"></span>
+                            <span class="texto-hover-accion">Agregar nuevo elemento</span>
+                        </button>                                            
+                    </div>
+                </div>
+                <div id="agregaDescuento" class="collapse has-feedback">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label for="agregaDescuento_nombre" class="sr-only">Nombre del descuento:</label>
+                            <input type="text" class="form-control" id="agregaDescuento_nombre" placeholder="Nombre del descuento">
+                            <span class="help-block">Este campo es obligatorio</span>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label for="agregaDescuento_valor" class="sr-only">Porcentaje de descuento:</label>
+                            <input type="text" class="form-control" id="agregaDescuento_valor" placeholder="Porcentaje de descuento">
+                            <span class="help-block">Este campo es obligatorio</span>
+                        </div>
+                        <div class="col-md-4 text-center form-group">
+                            <button class="btn btn-primary form-control" onclick="agregaDescuento();"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <table id="descuentos_tabla" class="table table-striped table-hover has-feedback" width="100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>Valor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="catalogo_proveedores">
+                <div class="row">
+                    <div class="col-md-5">
+                        <form id="form_agrega_proveedor" class="has-feedback">
+                            <h3 class="page-header">Agregar proveedor
+                                <small onclick="tourAgregarProveedor();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                            </h3>
+                            <div class="row" id="tour_form_agrega_proveedor" style="background:white">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Nombre completo:</label>
+                                        <input type="text" class="form-control" name="nombre" maxlength="15" value="" required>
+                                        <span class="help-block">Este campo es obligatorio</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email:</label>
+                                        <input type="email" class="form-control" name="email" value="" required>
+                                        <span class="help-block">Este campo es obligatorio</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Telefono:</label>
+                                        <input type="text" class="form-control" name="tel" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-primary form-control" type="submit"><span class="glyphicon glyphicon-save"></span> Crear proveedor</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group text-center">
+                                        <button class="btn btn-danger form-control" type="reset">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-7">
+                        <h3 class="page-header">Lista de proveedores
+                            <small onclick="tourListaProveedores();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="proveedores_tabla" style="width:100%;background:white;">
+                                <thead>
+                                    <tr>
+                                        <td></td>
+                                        <td>Nombre</td>
+                                        <td>Email</td>
+                                        <td>Teléfono</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal_editar_proveedor" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">Edita proveedor</h2>
+            </div>
+            <div class="modal-body project-info">
+                <form class="has-feedback" id="form_edita_proveedor">
+                    <input type="hidden" name="id" value="-1">
+                    <div class="form-group">
+                        <label>Nombre completo:</label>
+                        <input type="text" class="form-control" name="nombre" maxlength="15" value="" required>
+                        <span class="help-block">Este campo es obligatorio</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" class="form-control" name="email" value="" required>
+                        <span class="help-block">Este campo es obligatorio</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefono:</label>
+                        <input type="text" class="form-control" name="tel" value="">
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-save"></span> Guardar proveedor</button>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-danger" data-dismiss="modal" type="reset">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_categoria_proveedor" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">Asignar proveedor a categoría - <span class="nombre-proveedor"></span></h2>
+            </div>
+            <div class="modal-body project-info">
+                <input type="hidden" name="id" value="-1">
+                <div class="form-group">
+                    <label>Categoría:</label>
+                    <select id="select_categoria_proveedores" class="form-control" name="idCat"></select>
+                </div>
+                <div class="form-group text-center">
+                    <button class="btn btn-primary" id="asignaProveedorCategoria"><span class="glyphicon glyphicon-save"></span> Asignar categoría</button>
+                </div>
+                <br>
+                <div class="alert alert-info">
+                    Si el proveedor tiene categorias enlazadas, se enlistarán a continuación. Para remover el enlace, solo haz clic en él.
+                </div>
+                <div id="categorias_asignadas" class="row"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

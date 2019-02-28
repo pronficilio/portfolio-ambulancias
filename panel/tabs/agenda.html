@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Agenda</h1>
+    </div>
+    <div>
+        <ul class="nav nav-tabs" role="tablist" id="subtab_cliente">
+            <li role="presentation" class="active">
+                <a href="#agenda_agrega" role="tab" data-toggle="tab">Agrega actividad</a>
+            </li>
+            <li role="presentation">
+                <a href="#agenda_pen_lista" role="tab" data-toggle="tab">Lista de actividades pendientes</a>
+            </li>
+            <li role="presentation">
+                <a href="#agenda_com_lista" role="tab" data-toggle="tab">Lista de actividades completadas</a>
+            </li>
+        </ul>
+        <div class="tab-content margintop20">
+            <div role="tabpanel" class="tab-pane active" id="agenda_agrega">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <div class="row form-group has-feedback">
+                                <div class="col-sm-6">
+                                    <label class="control-label" for="agenda_select">Selecciona tarea</label>
+                                    <select class="form-control" id="agenda_select">
+                                        <option value="">Selecciona una tarea</option>
+                                        <option value="reunion">Reunión con un cliente</option>
+                                        <option value="llamada">Llamada a un cliente</option>
+                                        <option value="tarea">Otra actividad</option>
+                                    </select>
+                                    <span class="help-block">Este campo es obligatorio<br></span>
+                                </div>
+                                <div class="col-sm-6 hidden" id="agenda_busca_cliente">
+                                    <label class="control-label" for="agenda_auto_cliente">Selecciona un cliente</label>
+                                    <input type="text" id="agenda_auto_cliente" class="form-control">
+                                    <input type="hidden" id="agenda_id_cliente" value="">
+                                    <span class="help-block">Este campo es obligatorio<br></span>
+                                </div>
+                            </div>
+                            <div class="row form-group has-feedback">
+                                <div class="col-sm-6">
+                                    <label class="control-label" for="agenda_fecha">Fecha de realización</label>
+                                    <input type="date" id="agenda_fecha" class="form-control" placeholder="DD/MM/AAA">
+                                    <span class="help-block">Este campo es obligatorio<br></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="control-label" for="agenda_hora">Hora de realización <span class="text-muted">(formato 24 horas)</span></label>
+                                    <input type="time" id="agenda_hora" class="form-control" placeholder="HH:MM">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="agenda_notas">Notas adicionales</label>
+                                <textarea class="form-control" id="agenda_notas" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" onclick="agregaActividad();">Agrega actividad</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="agenda_pen_lista">
+                <div class="container">
+                    <table id="tabla_act_pend" class="table table-striped table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
+                                <th>Notas</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="agenda_com_lista">
+                <div class="container">
+                    <table id="tabla_act_com" class="table table-striped table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
+                                <th>Notas</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

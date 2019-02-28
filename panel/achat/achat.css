@@ -1,0 +1,166 @@
+#achat-chat{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    width: 250px;
+    height: 289px;
+    line-height: 1.42857143;
+    position: fixed;
+    bottom: 0px;
+    z-index: 10000;
+    right: 5%;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+}
+#achat-chat *{
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#achat-chat .text-center{
+    text-align: center;
+}
+#achat-cabecera{
+    cursor: pointer;
+    font-size: 80%;
+    background: #00356F;
+    color: white;
+    padding: 5px;
+    margin: 0px;
+}
+.achat-cuerpo{
+    /*padding-right: 10px;*/
+    background: #EDEEF1;
+    height: 227px;
+    overflow-x: auto;
+    border: 1px solid #B5BBC9;
+}
+
+.achat-mensaje{
+    width: 100%;
+    padding: 5px 6px 7px 5px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    clear: both;
+}
+    .achat-mensaje p{
+        font-size: 80%;
+        margin: 0px;
+        padding: 0px 5px 0px 5px;
+        border-radius: 5px;
+    }
+    .achat-mensaje:last-child p{
+        margin-bottom: 10px;
+    }
+.achat-yo{
+    float: right;
+    text-align: right;
+    width: auto;
+    max-width: 70%;
+    background-color: #e0edff;
+    border: 1px solid #bcc7d6;
+
+}
+.achat-el{
+    float: left;
+    width: auto;
+    max-width: 70%;
+    background-color: #fefefe;
+    border: 1px solid #d5d5d5;
+}
+#achat-mandaMensaje input{
+    font-size: 80%;
+    margin: 0px;
+    border-radius: 0px;
+    border-style: solid;
+}
+#achat-mandaMensaje_input{
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    display: block;
+    min-width: 236px;
+    width: 100%;
+    height: 34px;
+    padding: 0px 0px 0px 12px;
+}
+.achat-escondete{
+    height: 25px !important;
+}
+    .achat-escondete > div{
+        display: none;
+    }
+.achat-ocultamiento{
+    font-size: 80%;
+    height: 260px;
+    overflow: visible;
+}
+    .achat-ocultamiento #achat-instrucciones{
+        display: block;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 10px;
+    }
+#achat-instrucciones{
+    display: none;
+}
+    #achat-instrucciones label{
+        width: 100%;
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+    #achat-instrucciones .form-control{
+        padding-left: 10px;
+        height: 28px;
+    }
+#achat-chat .form-control{
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+#achat-chat label{
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+#achat-chat .btn{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}

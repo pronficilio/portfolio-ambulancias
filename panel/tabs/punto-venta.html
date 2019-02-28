@@ -1,0 +1,666 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Punto de venta</h1>
+    </div> 
+    <div>
+        <ul class="nav nav-tabs" role="tablist" id="subtab_punto-venta">
+            <li role="presentation" class="active">
+                <a href="#venta-punto" role="tab" data-toggle="tab">Venta</a>
+            </li>
+            <li role="presentation">
+                <a href="#venta-salida" role="tab" data-toggle="tab">Salida de inventario</a>
+            </li>
+            <li role="presentation">
+                <a href="#venta-devolucion" role="tab" data-toggle="tab">Devoluciones</a>
+            </li>
+            <li role="presentation">
+                <a href="#venta-carritosabiertos" role="tab" data-toggle="tab">Carritos abiertos</a>
+            </li>
+            <li role="presentation">
+                <a href="#venta-agregar-barras" role="tab" data-toggle="tab">Agregar código de barras</a>
+            </li>
+            <li role="presentation">
+                <a href="#venta-eliminar-barras" role="tab" data-toggle="tab">Eliminar código de barras</a>
+            </li>
+            <li role="presentation">
+                <a href="#venta-consulta-ventas" role="tab" data-toggle="tab">Reporte de ventas</a>
+            </li>
+        </ul>
+        <div class="tab-content margintop20">
+            <div role="tabpanel" class="tab-pane active" id="venta-punto">
+                <div class=" container">
+                    <div class="alert alert-info">
+                        Usa el <strong>lector de código de barras</strong> para agregar un producto al carrito<br>
+                        Modifica su cantidad a 0 para eliminar el producto de la venta
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button class="btn btn-xs btn-info" id="imprimir_ultimo_ticket">Imprimir último ticket</button>
+                        </div>
+                        <div class="col-md-8">
+                            <form id="simulaBarcode">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-md-6 control-label text-right">Código de barras manual</label>
+                                        <div class="col-md-6">
+                                            <input type="text" id="barcodemanual" class="form-control" placeholder="Presionar ENTER al terminar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <form id="punto_venta_form" class="margintop20">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <table id="tabla-nueva-venta" class="table table-striped table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th>Categoría</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio unitario</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Cliente:</label>
+                                        <div class="col-md-9"><select class="form-control select2cliente" style="width: 100%" name="idCliente"></select></div>
+                                    </div>
+                                </div>
+                                <div class="form-group hidden" id="tieneSaldoAFavor">
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Crédito a favor:</label>
+                                        <div class="col-md-9"><input type="number" class="form-control" step="0.01" name="credito2" readonly=""></select></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-md-3 control-label">Descuento:</label>
+                                        <div class="col-md-9"><select class="form-control" id="select_pv_descuento" name="descuento"></select></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="requiereFacturaCB" name="requiereFactura" value="1">
+                                        Requiere factura
+                                    </label>
+                                </div>
+                                <div id="datosFacturacion">
+                                    <div class="form-group">
+                                        <label> RFC </label>
+                                        <input type="text" class="form-control" name="razonSocial">
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Teléfono </label>
+                                        <input type="text" class="form-control" name="correoFactura">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-danger form-control" type="button" onclick="vaciarCarritoPV();">Vaciar carrito</button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-info form-control" type="button" onclick="guardarCarrito();">Guardar carrito</button>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-success form-control">Pagar carrito</button>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-6 text-right">
+                                        <p class="lead">Total a pagar:</p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="lead"><mark>$<span id="total-pagar"></span></mark></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 text-right">
+                                        <p class="lead">Total de productos:</p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="lead"><span id="total-productos"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="modal fade" id="modal_formaPago" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 style="margin: 0px;" class="text-center">
+                                            Monto a cubrir: $<span id="modalfp_total"></span>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="" class="col-md-3 control-label">Cheque</label>
+                                                    <div class="col-md-9">
+                                                        <input type="number" name="cheque" step="0.01" class="cobranza form-control">
+                                                    </div>
+                                                    <div class="col-md-12 text-center">
+                                                        <br>
+                                                        <button type="button" class="btn btn-info cubrirTodo">Con cheque</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="" class="col-md-3 control-label">Tarjeta</label>
+                                                    <div class="col-md-9">
+                                                        <input type="number" name="tarjeta" step="0.01" class="cobranza form-control">
+                                                    </div>
+                                                    <div class="col-md-12 text-center">
+                                                        <br>
+                                                        <button type="button" class="btn btn-info cubrirTodo">Con tarjeta</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="" class="col-md-3 control-label">Efectivo</label>
+                                                    <div class="col-md-9">
+                                                        <input type="number" name="efectivo" step="0.5" class="cobranza form-control">
+                                                    </div>
+                                                    <div class="col-md-12 text-center">
+                                                        <br>
+                                                        <button type="button" class="btn btn-info cubrirTodo">Con efectivo</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 hidden" id="tieneCredito">
+                                                <br><br>
+                                                <div class="form-group">
+                                                    <label for="" class="col-md-3 control-label">Crédito</label>
+                                                    <div class="col-md-9">
+                                                        <input type="number" name="credito" step="0.01" class="form-control" readonly="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <hr>
+                                            </div>
+                                            <div class="col-md-6 col-md-offset-6">
+                                                <br>
+                                                <div class="form-group">
+                                                    <label for="" class="col-md-5 control-label">Efectivo recibido</label>
+                                                    <div class="col-md-7">
+                                                        <input type="number" name="cualrecibo" step="0.5" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12"><br></div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-md-5 control-label">Cambio: </label>
+                                                    <div class="col-md-7 mark" id="modalfp_cajaCambio"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-default reiniciar">Reiniciar</button>
+                                        <button type="button" class="btn btn-primary" onclick="finalizarVenta();" disabled>Finalizar Venta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="venta-salida">
+                <div class="alert alert-info">Usa el <strong>lector de código de barras</strong> para iniciar el reporte de salida de inventario.</div>
+                <form id="simulaBarcode3">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-6 control-label text-right">Código de barras manual</label>
+                            <div class="col-md-6">
+                                <input type="text" id="barcodemanual3" class="form-control" placeholder="Presionar ENTER al terminar">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-3">
+                        Fecha de inicio *
+                        <input type="date" id="fechaIni_s_vd" class="form-control" value="">
+                    </div>
+                    <div class="col-md-3">
+                        Fecha de fin *
+                        <input type="date" id="fechaFin_s_vd" class="form-control" value="">
+                    </div>
+                    <div class="col-md-3">
+                        <br><button class="btn btn-primary form-control" id="consulta_salida_boton">Consultar</button>
+                        <br><span class="help-text">* Campos obligatorios</span>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="margintop20">
+                    <table id="tabla_salida_inventario" class="table table-striped table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Descripción</th>
+                                <th>Cantidad salida</th>
+                                <th>Nota</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="venta-devolucion">
+                <div class="alert alert-info">
+                    Selecciona una rango de fechas para ver las ventas realizadas.
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Fecha de inicio *
+                        <input type="date" id="fechaIni_vd" class="form-control" value="">
+                    </div>
+                    <div class="col-md-3">
+                        Fecha de fin *
+                        <input type="date" id="fechaFin_vd" class="form-control" value="">
+                    </div>
+                    <div class="col-md-3">
+                        Filtrar cliente
+                        <select class="form-control select2cliente" style="width: 100%" id="cliente_vd"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <br><button class="btn btn-primary form-control" id="consulta_devolucion_boton">Consultar</button>
+                        <br><span class="help-text">* Campos obligatorios</span>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="margintop20">
+                    <table id="carritos_tabla_listaDPV" class="table table-striped table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th><span class="sr-only">ID</span><span class='_tool' title='Número de pedido' data-toggle='tooltip'><span class="glyphicon glyphicon-barcode"></span></span></th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Unidades compradas</th>
+                                <th>Vendedor</th>
+                                <th>Facturación</th>
+                                <th>Efectivo</th>
+                                <th>Tarjeta</th>
+                                <th>Cheque</th>
+                                <th>A cuenta</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="venta-carritosabiertos">
+                <div class="alert alert-info">
+                    Selecciona una rango de fechas para ver los carritos creados
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        Fecha de inicio *
+                        <input type="date" id="fechaIni_ca_vd" class="form-control" value="">
+                    </div>
+                    <div class="col-md-3">
+                        Fecha de fin *
+                        <input type="date" id="fechaFin_ca_vd" class="form-control" value="">
+                    </div>
+                    <div class="col-md-3">
+                        Filtrar cliente
+                        <select class="form-control select2cliente" style="width: 100%" id="cliente_ca_vd"></select>
+                    </div>
+                    <div class="col-md-3">
+                        <br><button class="btn btn-primary form-control" id="consulta_carritosabiertos_boton">Consultar</button>
+                        <br><span class="help-text">* Campos obligatorios</span>
+                    </div>
+                </div>
+                <br>
+                <hr>
+                <div class="margintop20">
+                    <table id="carritos_tabla_listaCarrAbi" class="table table-striped table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th><span class="sr-only">ID</span><span class='_tool' title='Número de pedido' data-toggle='tooltip'><span class="glyphicon glyphicon-barcode"></span></span></th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Unidades compradas</th>
+                                <th>Vendedor</th>
+                                <th>Facturación</th>
+                                <th>Efectivo</th>
+                                <th>Tarjeta</th>
+                                <th>Cheque</th>
+                                <th>A cuenta</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="venta-agregar-barras">
+                <div class="container">
+                    <div class="alert alert-info">
+                        Escribe para empezar a buscar un producto. Cuando lo selecciones, se abrirá un botón para escanear el nuevo código de barras.
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h3>
+                                Escribe el nombre del producto
+                            </h3>
+                        </div>
+                        <div class="col-md-offset-3 col-md-6"><input type="text" id="barra-agrega-producto" class="form-control"></div>
+                    </div>
+                    <div id="barra-contenedor-producto">
+                        <h2 class="nombre-producto">Nombre del producto</h2>
+                        <p class="lead descripcion-producto">Descripción</p>
+                        <p class="lead"><strong>Precio:</strong> $<span class="precio-producto">0.00</span></p>
+                        <p class="lead"><strong>En inventario:</strong> <span class="en-inventario">0</span></p>
+                        <div class="alert alert-info text-center">
+                            <strong>Haz clic en el botón "Escanear" y utiliza el lector de código de barras para asignar un código de barras</strong>
+                            <br><br>
+                            <button class="btn btn-success">Escanear</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="alert alert-info">
+                        En esta sección puedes importar varios productos. Descarga el esqueleto, llenalo de valores reales y súbelo.
+                    </div>
+                    <form enctype="multipart/form-data" id="form_importar_cvs">
+                        <div class="row">
+                            <div class="col-md-4 lead">
+                                Importa .cvs<br>
+                                <small><small><a href="xls/esqueleto.csv" download>Descarga esqueleto</a></small></small>
+                            </div>
+                            <div class="col-md-4"><input type="file" class="form-control" name="importa_prod[]"></div>
+                            <div class="col-md-4"><input type="submit" class="form-control btn btn-primary primary"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="venta-eliminar-barras">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h3 class="alert alert-info">
+                                Escanea un código de barras para iniciar el proceso de eliminación
+                            </h3>
+                        </div>
+                    </div>
+                    <div id="barra-contenedor-producto-eliminar">
+                        <h2 class="nombre-producto">Nombre del producto</h2>
+                        <p class="lead descripcion-producto">Descripción</p>
+                        <p class="lead"><strong>Precio:</strong> $<span class="precio-producto">0.00</span></p>
+                        <p class="lead"><strong>En inventario:</strong> <span class="en-inventario">0</span></p>
+                        <div class="alert alert-info text-center">
+                            <strong>Haz clic en el botón "Borrar código" para finalizar la eliminación de código de barras</strong>
+                            <br><br>
+                            <button class="btn btn-success" id="eliminarBarcode">Eliminar código de barras</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="venta-consulta-ventas">
+                <div class="alert alert-info">
+                    Selecciona una rango de fechas para ver las ventas realizadas.
+                </div>
+                <div class="row">
+                    <div class="col-md-3" style="border-right: 1px solid #cecece">
+                        <div class="">
+                            Fecha de inicio *
+                            <input type="date" id="fechaIni_vcv" class="form-control" value="">
+                        </div>
+                        <div class="" style="margin-top:10px;">
+                            Fecha de fin *
+                            <input type="date" id="fechaFin_vcv" class="form-control" value="">
+                        </div>
+                        <div class="" style="margin-top:10px;">
+                            Filtrar cliente
+                            <select class="form-control select2cliente" style="width: 100%" id="cliente_vcv"></select>
+                        </div>
+                        <div class="text-right">
+                            <br><button class="btn btn-primary form-control" id="consulta_ventas_boton">Consultar</button>
+                            <br><span class="help-text" style="color:#666">* Campos obligatorios</span>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-3">U. vendidas: 
+                                <span class="form-control" title="Unidades vendidas" role="help"><span id="pv_totalConsultaU"></span></span>
+                            </div>
+                            <div class="col-md-3">Total: 
+                                <span class="form-control" title="Total" role="help"><span id="pv_totalConsulta"></span></span>
+                            </div>
+                            <div class="col-md-3">Total de IVA: 
+                                <span class="form-control" title="Total IVA" role="help"><span id="pv_totalConsultaIVA"></span></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" style="margin-top:10px;">Efectivo: 
+                                <span class="form-control" title="Efectivo" role="help"><span id="pv_totalConsultaE"></span></span>
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px;">Tarjeta: 
+                                <span class="form-control" title="Tarjeta" role="help"><span id="pv_totalConsultaT"></span></span>
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px;">Cheque: 
+                                <span class="form-control" title="Cheque" role="help"><span id="pv_totalConsultaC"></span></span>
+                            </div>
+                            <div class="col-md-3" style="margin-top:10px;">A cuenta: 
+                                <span class="form-control" title="A cuenta" role="help"><span id="pv_totalConsultaAC"></span></span>
+                            </div>
+                        </div>
+                        <div style="margin-top:10px;">
+                            <strong>Productos vendidos</strong>
+                            <div class="row" id="productosVendidos_pv" style="max-height: 135px; overflow-y: auto; overflow-x: hidden;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margintop20">
+                    <table id="carritos_tabla_listaCPV" class="table table-striped table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th><span class="sr-only">ID</span><span class='_tool' title='Número de pedido' data-toggle='tooltip'><span class="glyphicon glyphicon-barcode"></span></span></th>
+                                <th>Cliente</th>
+                                <th>Fecha de compra</th>
+                                <th>Unidades compradas</th>
+                                <th>Vendedor</th>
+                                <th>Facturación</th>
+                                <th>Efectivo</th>
+                                <th>Tarjeta</th>
+                                <th>Cheque</th>
+                                <th>A cuenta</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalProductoSalida" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    Salida de inventario<br><small id="mps_nombrepr"></small>
+                </h2>
+            </div>
+            <div class="modal-body project-info">
+                <form id="form_salidainventario">
+                    <input type="hidden" name="id" value="0">
+                    <div class="form-group">
+                        <label class="control-label">Código de barras:</label>
+                        <input type="text" id="codigobarrasps" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Cantidad:</label>
+                        <input type="text" name="cantidad" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nota:</label>
+                        <textarea class="form-control" name="nota" row="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Reportar salida">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalProductosCarrito_asignauser" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    Asignar cliente
+                </h2>
+            </div>
+            <div class="modal-body project-info">
+                <div id="mensajesContenidoCarrito"></div>
+                <form id="asignausuario">
+                    <input type="hidden" name="id" value="0">
+                    <div class="form-group">
+                        <label class="control-label">Selecciona un cliente</label>
+                        <select class="form-control select2cliente" name="idCliente"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Asignar usuario">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalProductosCarrito_devolucion" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title">
+                    Devolución - Lista de productos del carrito
+                    <br>
+                    <small>De <span id="modal_carrito_cliente_d"></span></small>
+                </h2>
+            </div>
+            <div class="modal-body project-info">
+                <div id="mensajesContenidoCarrito"></div>
+                <div class="alert alert-warning">
+                    Para hacer una devolución, haz clic en el botón <i class="glyphicon glyphicon-erase"></i>.<br>
+                    <strong>La devolución asignará crédito a favor para el cliente, regresará el producto a inventario y se eliminará el registro del carrito.</strong>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Datos del carrito</h4>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="modal_carrito_fecha_d" class="control-label">
+                                    Creación
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <span id="modal_carrito_fecha_d"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="modal_carrito_subtotal_d" class="control-label">
+                                    Subtotal
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <span id="modal_carrito_subtotal_d"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="modal_carrito_descuento_d" class="control-label">
+                                    Descuento
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <span id="modal_carrito_descuento_d"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="modal_carrito_total_d" class="control-label">
+                                    Total
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <mark id="modal_carrito_total_d"></mark>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Datos del cliente</h4>
+                        <div class="row">
+                            <div class="col-sm-4">Cliente:</div>
+                            <div class="col-sm-8"><span id="modal_carrito_cliente2_d"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">Crédito a favor:</div>
+                            <div class="col-sm-8"><span id="modal_carrito_saldo_d"></span></div>
+                        </div>
+                        <h4>Datos de pago</h4>
+                        <div class="row">
+                            <div class="col-sm-4">Efectivo:</div>
+                            <div class="col-sm-8"><span id="modal_carrito_efectivo_d"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">Tarjeta:</div>
+                            <div class="col-sm-8"><span id="modal_carrito_tarjeta_d"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">Cheque:</div>
+                            <div class="col-sm-8"><span id="modal_carrito_cheque_d"></span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">Crédito:</div>
+                            <div class="col-sm-8"><span id="modal_carrito_credito_d"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="">
+                    <table id="carritoContenido_tabla_d" class="table table-striped table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th class="text-center">Precio</th>
+                                <th>Cantidad</th>
+                                <th class="text-center">Subtotal</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
