@@ -1,0 +1,104 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*
+	font-family: 'Oxygen', sans-serif;
+	font-family: 'Karla', sans-serif;	
+	color:#464646; *** Gray Text
+	color:#858686; *** Light Gray
+	color:#DE2515; *** Red
+	color:#B61265; *** Purple
+	color:#DE7616; *** Orange
+*/
+
+body {
+	font-family: 'Karla', sans-serif;
+	color:#464646;
+}
+
+#phone {
+	text-align:right;
+}
+
+h1 {
+	color: #BE1F12;
+	font-size: 24px;
+	font-family: 'Oxygen', sans-serif;
+	text-transform: uppercase;
+}
+
+h2 {
+	color: #868787;
+	font-size: 18px;
+	font-family: 'Oxygen', sans-serif;
+	text-transform: uppercase;
+}
+h4f {
+	color: #858686;
+	font-size: 20px;
+	font-family: 'Oxygen', sans-serif;
+	text-transform: uppercase;
+}
+
+
+h4 {
+	color:#858686;
+	font-size:20px;
+	line-height:20px;
+	text-shadow: 1px 1px 0px #AAAAAA;
+}
+
+h4 strong {
+	font-weight:700;
+	color:#DE2515;
+	text-shadow: 1px 1px 0px #EA3526;
+}
+
+h5 {
+	color:#858686;
+	font-size:20px;
+	line-height:30px;
+}
+h5 a, h5 a:hover {
+	color:#464646;
+	text-shadow: 1px 1px 0px #616161;
+}
+
+#content a {
+	color: #BE1F12;
+}
+
+#footer h6 {
+	color:#858686;
+	font-size:18px;
+	line-height:24px;
+}
+
+/***** Index *****/
+.index div, #contentLeft div, #contentRight div {
+	color:#FFF;
+}
+.index div h6 {
+	font-family: 'Oxygen', sans-serif;
+	text-transform: uppercase;
+	font-size:18px;
+	font-weight:bold;
+}
+
+#contentRight div h3 {
+	font-family: 'Oxygen', sans-serif;
+	text-transform: uppercase;
+	font-size:18px;
+	font-weight:bold;
+}
+
+#copyright {
+	font-size:12px;
+	color:#686868;
+}
+
+#fcdigital, #fcdigital a {
+	font-size:10px;
+	color: #999;
+}
