@@ -1,0 +1,237 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/************** SuperFish *************/
+/*** no mover***/
+.sf-menu, .sf-menu * {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.sf-menu li {
+	position: relative;
+}
+.sf-menu ul {
+	position: absolute;
+	display: none;
+	top: 100%;
+	left: 0;
+	z-index: 99;
+}
+.sf-menu > li {
+	float: left;
+}
+.sf-menu li:hover > ul,
+.sf-menu li.sfHover > ul {
+	display: block;
+}
+
+.sf-menu a {
+	display: block;
+	position: relative;
+}
+.sf-menu ul ul {
+	top: 0;
+	left: 100%;
+}
+
+
+/*** DEMO SKIN ***/
+.sf-menu {
+	float: left;
+	margin-bottom: 1em;
+}
+.sf-menu ul {
+	box-shadow: 2px 2px 6px rgba(0,0,0,.2);
+	min-width: 12em; /* allow long menu items to determine submenu width */
+	*width: 12em; /* no auto sub width for IE7, see white-space comment below */
+}
+.sf-menu a {
+	padding: 10px;
+	text-decoration: none;
+	zoom: 1; /* IE7 */
+}
+.sf-menu a {
+	color: #FFFFFF;
+	font-family: 'Oxygen', sans-serif;
+	font-size:11px;
+	text-transform:uppercase;
+	font-weight:700;
+	text-align:center;
+}
+.sf-menu li {
+	/*background: #000;  Fondo del menú principal en estado normal */
+	white-space: nowrap; /* no need for Supersubs plugin */
+	*white-space: normal; /* ...unless you support IE7 (let it wrap) */
+	-webkit-transition: background .2s;
+	transition: background .2s;
+	height: 50px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #9B1A0F;
+	border-left-color: #E24539;
+}
+.sf-menu li:first-child { 
+	border-left:none;
+}
+.sf-menu li:last-child { 
+	border-right:none;
+}
+@media (min-width: 1200px) {
+.sf-menu a {
+	padding-left:18px;
+	padding-right:18px;
+}
+}
+
+.sf-menu ul {
+	padding: 5px 10px 15px 10px;
+	
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 0%, #ffffff 64%, #f2f2f2 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(64%,#ffffff), color-stop(100%,#f2f2f2)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #ffffff 0%,#ffffff 64%,#f2f2f2 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #ffffff 0%,#ffffff 64%,#f2f2f2 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #ffffff 0%,#ffffff 64%,#f2f2f2 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #ffffff 0%,#ffffff 64%,#f2f2f2 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 ); /* IE6-9 */
+
+}
+
+
+.sf-menu ul li {
+	line-height:25px!important;
+	height:25px;
+	border:none;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #EEEEEE;
+}
+
+.sf-menu ul li:hover {
+}
+.sf-menu ul li a {
+	color: #868787!important;
+	text-align: left;
+	padding: 0px;
+	font-weight: 400;
+}
+.sf-menu ul li:hover a {
+	color:#464646!important;
+}
+
+
+.sf-menu li:hover,
+.sf-menu li.sfHover {
+	background: #FFF; /* Fondo del menú principal en estado hover */
+	/* only transition out, not in */
+	-webkit-transition: none;
+	transition: none;
+}
+
+.sf-menu li:hover a,
+.sf-menu li.sfHover a {
+	color:#464646;
+}
+
+
+
+
+
+
+
+/********* Estilos Menús **********/
+#navTop, #navLeft, #navRight, #navFooter, #navCatalog {
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+
+#navTop a, #navLeft a, #navRight a, #navFooter a, #navCatalog a {
+	display:block;
+}
+
+
+
+/***** Menú Top *****/
+#navTop li {
+	float:left;
+	margin-right:25px;
+}
+
+#navTop a {
+	display: block;
+	line-height: 30px;
+	color: #464646;
+	text-transform: uppercase;
+	font-family: 'Oxygen', sans-serif;
+	font-size: 12px;
+	padding-left: 50px;
+	background-image: url(../images/backgrounds/spriteNavTop.png);
+	background-repeat: no-repeat;
+}
+#navTop a:hover {
+	color:#DE2515;
+}
+
+#navTop a.empresa {
+	background-position: 0px 0px;
+}
+
+#navTop a.galeria {
+	background-position: 0px -30px;
+}
+
+#navTop a.contacto {
+	background-position: 0px -60px;
+}
+
+#navTop a.opinion {
+	background-position: 0px -90px;
+}
+
+#navTop a.empresa:hover {
+	background-position: 0px -120px;
+}
+
+#navTop a.galeria:hover {
+	background-position: 0px -150px;
+}
+
+#navTop a.contacto:hover {
+	background-position: 0px -180px;
+}
+
+#navTop a.opinion:hover {
+	background-position: 0px -210px;
+}
+
+
+
+/***** Menúas Auxiliares: Left, Right, Catalog o Footer *****/
+
+#navFooter li {
+	float:left;
+	margin-right:10px;
+}
+
+#navFooter a {
+	display: block;
+	line-height: 30px;
+	color: #464646;
+	text-transform: uppercase;
+	font-family: 'Oxygen', sans-serif;
+	font-size: 14px;
+	font-weight:700;
+	padding-left:28px;
+	background-image: url(../images/backgrounds/spriteNavFooter.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+}
+
+#navFooter a:hover {
+	background-position: 0px -30px;
+}
