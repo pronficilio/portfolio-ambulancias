@@ -1,0 +1,112 @@
+<html lang="es">
+    <script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="pronficilio">
+        <title>MEDEVAC Ambulancias - Panel</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/signin.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <form class="form-signin" id="forma">
+                <h2 class="form-signin-heading">Iniciar sesión</h2>
+                <div class="input-group">
+                    <input type="text" id="uLogin" class="form-control"
+                           placeholder="Nombre de usuario" required="" autofocus="">
+                    <label for="uLogin" class="input-group-addon"><span class="glyphicon glyphicon-user"></span></label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="pLogin" class="form-control"
+                           placeholder="Contraseña" required="" autofocus="">
+                    <label for="pLogin" class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></label>
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="form-control btn btn-primary" id="ok">Iniciar sesión</button>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-primary" role="progressbar"
+                             aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">progress</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="js/jquery-1.12.0.min.js"></script>
+        <script>
+            function dondeDeberiasEstar(url){
+                $.ajax({
+                    cache: false,
+                    url: "ajax/acceso/dondeDeberiasEstar.php",
+                    type: "post",
+                    data: "url="+url,
+                    success: function(data){
+                        if(data != "")
+                            eval(data);
+                    }
+                });
+            }
+            $(function(){
+                dondeDeberiasEstar("index");
+                $('#forma').submit(function(e){
+                    e.preventDefault();
+                    var button = $("#ok");
+                    var inputs = $('form input');
+                    var progressBar = $('.progress-bar');
+                    if(button.attr("data-dismiss") != "error"){
+                        var title = $('.modal-title');
+                        var progress = $('.progress');
+                        inputs.attr("disabled", "disabled");
+                        button.hide();
+                        progress.show();
+                        progressBar.animate({width : "100%"}, 100);
+                        progress.delay(1000)
+                                .fadeOut(400);
+                        $.ajax({
+                            async: true,
+                            cache: false,
+                            type: "post",
+                            url: "ajax/acceso/login.php",
+                            data: "usuario="+$("#uLogin").val()+"&pass="+$("#pLogin").val(),
+                            success: function(data){
+                                if(data == ""){
+                                    button.text("Inicio exitoso")
+                                            .removeClass("btn-primary")
+                                            .addClass("btn-success")
+                                            .blur()
+                                            .delay(1100)
+                                            .fadeIn(function(){
+                                                button.attr("data-dismiss", "ok");
+                                                setInterval(function(){ window.location = "panel.html"; }, 500);
+                                            });
+                                }else{
+                                    button.text("Datos incorrectos. Clic para reintentar")
+                                        .removeClass("btn-primary")
+                                        .addClass("btn-danger")
+                                        .blur()
+                                        .delay(1100)
+                                        .fadeIn(function(){
+                                            button.attr("data-dismiss", "error");
+                                        });
+                                }
+                            }
+                        });
+                    }else{
+                        inputs.removeAttr("disabled");
+                        $("#uLogin").val("");
+                        $("#pLogin").val("");
+                        button.removeClass("btn-danger")
+                                .addClass("btn-primary")
+                                .text("Enviar")
+                                .removeAttr("data-dismiss");
+                        progressBar.css({ width : "0%" });
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

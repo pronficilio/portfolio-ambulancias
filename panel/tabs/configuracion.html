@@ -1,0 +1,438 @@
+<div class="container">
+    <h2 class="page-header">Configuración</h2>
+    <div>
+        <ul class="nav nav-tabs" role="tablist" id="subtab_configuracion">
+            <li role="presentation" class="active">
+                <a href="#configuracion_perfil" role="tab" data-toggle="tab">Perfil</a>
+            </li>
+            <li role="presentation">
+                <a href="#configuracion_usuarios" role="tab" data-toggle="tab">Usuarios</a>
+            </li>
+            <li role="presentation" class="hidden">
+                <a href="#configuracion_mensaje" role="tab" data-toggle="tab">Mensajes</a>
+            </li>
+            <li role="presentation" class="hidden">
+                <a href="#configuracion_costo" role="tab" data-toggle="tab">Costo de envio</a>
+            </li>
+            <li role="presentation">
+                <a href="#configuracion_permisos" role="tab" data-toggle="tab">Permisos</a>
+            </li>
+            <!--li role="presentation">
+                <a href="#configuracion_destacados" role="tab" data-toggle="tab">Destacados</a>
+            </li-->
+        </ul>
+        <div class="tab-content margintop20">
+            <div role="tabpanel" class="tab-pane active" id="configuracion_perfil">
+                <h3 class="page-header">Datos personales</h3>
+                <form id="form_datos_personales" >
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 has-feedback">
+                            <div class="form-group">
+                                <label>Nombre:</label>
+                                <input type="text" name="nombre" class="form-control" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="user_nombre">Usuario:</label>
+                                <input type="text" class="form-control" name="username" id="user_nombre" class="nombre_usuario" maxlength="15" value="">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="text" name="email" class="form-control" value="">
+                            </div>
+                            <div class="alert alert-info" role="alert">
+                                <span class="close">&times;</span>
+                                Si no deseas modificar la contraseña, deja los siguientes campos vacíos
+                            </div>
+                            <div class="form-group">
+                                <label for="user_contra1">Nueva contraseña:</label>
+                                <input type="password" name="nueva_contra_1" class="form-control" id="user_contra1" autocomplete="off">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="user_contra2">Confirma contraseña:</label>
+                                <input type="password" name="nueva_contra_2" class="form-control" id="user_contra2" autocomplete="off">
+                                <span class="help-block">Este campo es obligatorio</span>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+
+            <div role="tabpanel" class="tab-pane" id="configuracion_permisos">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form id="form_agregar_permiso" class="has-feedback">
+                            <h3 class="page-header">
+                                Agregar permiso
+                                <small onclick="tourAgregarPermiso();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                            </h3>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4"><strong>Nombre del permiso</strong></div>
+                                    <div class="col-md-8"><input type="text" name="nombre" class="form-control" required></div>
+                                </div>
+                            </div>
+                            <div id="tree_permisos" style="background:white;"></div>
+                            <br>
+                            <div class="form-group text-center">
+                                <button class="btn btn-primary" type="submit">Agregar permisos</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="page-header">
+                            Lista de permisos
+                            <small onclick="tourListaPermiso();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="configuracion_permisos_lista" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>Permiso</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div id="tree" class="hidden">
+                    <ul>
+                        <!--li data-jstree='{"icon" : "glyphicon glyphicon-envelope"}' param="historial" id="ni_historial">
+                            Historial Achat
+                        </li-->
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-list"}' param="catalogos" id="ni_catalogos">
+                            Catálogos
+                            <ul>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="catalogo_categorias" id="ni_catalogo_categorias">
+                                    Categorías
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="catalogo_subcategorias" id="ni_catalogo_subcategorias">
+                                    Subcategorías
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="catalogo_descuentos" id="ni_catalogo_descuentos">
+                                    Descuentos
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="catalogo_proveedores" id="ni_catalogo_proveedores">
+                                    Proveedores
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-blackboard"}' param="productos" id="ni_productos">
+                            Productos
+                            <ul>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="productos_agregar" id="ni_productos_agregar">
+                                    Agregar producto
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-folder-open"}' param="productos_lista" id="ni_productos_lista">
+                                    Lista de productos
+                                    <ul>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-eye-open"}' param="solo-ver-productos" id="ni_solo-ver-productos">
+                                            Ver lista
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-pencil"}' param=".editaProducto" id="ni_.editaProducto">
+                                            Editar producto
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-list-alt"}' param=".editaInventario" id="ni_.editaInventario">
+                                            Editar los datos del inventario
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-tag"}' param=".editaOutlet" id="ni_.editaOutlet">
+                                            Outlet
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-camera"}' param=".agregaImagenProducto" id="ni_.agregaImagenProducto">
+                                            Editar imagenes
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-file"}' param=".agregaArchivoProducto" id="ni_.agregaArchivoProducto">
+                                            Editar los archivos
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-trash"}' param=".eliminaProducto" id="ni_.eliminaProducto">
+                                            Eliminar producto
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-shopping-cart"}' param="carritos" id="ni_carritos">
+                            Carritos
+                            <ul>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="carritos_listaA" id="ni_carritos_listaA">
+                                    Carritos abiertos
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="carritos_listaC" id="ni_carritos_listaC">
+                                    Carritos cerrados
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-barcode"}' param="punto-venta" id="ni_punto-venta">
+                            Punto de venta
+                            <ul>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="venta-punto" id="ni_venta-punto">
+                                    Venta
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="venta-salida" id="ni_venta-salida">
+                                    Salida de inventario
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="venta-devolucion" id="ni_venta-devolucion">
+                                    Devolución
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="venta-carritosabiertos" id="ni_venta-carritosabiertos">
+                                    Carritos abiertos
+                                </li>
+                                <!--li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="venta-inventario" id="ni_venta-inventario">
+                                    Agregar a inventario
+                                </li-->
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="venta-agregar-barras" id="ni_venta-agregar-barras">
+                                    Agregar código de barras
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="venta-eliminar-barras" id="ni_venta-eliminar-barras">
+                                    Eliminar código de barras
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="venta-consulta-ventas" id="ni_venta-consulta-ventas">
+                                    Reporte de ventas
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-barcode"}' param="cuenta" id="ni_cuenta">
+                            Punto de venta - A cuenta
+                        </li>
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-user"}' param="clientes" id="ni_clientes">
+                            Clientes
+                            <ul>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="clientes_agrega" id="ni_clientes_agrega">
+                                    Agrega cliente
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-folder-open"}' param="clientes_lista" id="ni_clientes_lista">
+                                    Lista de clientes
+                                    <ul>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-eye-open"}' param="solo-ver-clientes" id="ni_solo-ver-clientes">
+                                            Ver lista
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-pencil"}' param=".editaCliente" id="ni_.editaCliente">
+                                            Edita cliente
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-earphone"}' param=".creaLlamada" id="ni_.creaLlamada">
+                                            Hacer llamada
+                                        </li>
+                                        <li data-jstree='{"icon" : "glyphicon glyphicon-trash"}' param=".eliminaCliente" id="ni_.eliminaCliente">
+                                            Eliminar cliente
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="clientes_registrados" id="ni_clientes_registrados">
+                                    Registrados
+                                </li>
+                            </ul>
+                        </li>
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-envelope"}' param="historial" id="ni_historial">
+                            Historial
+                        </li>
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-calendar"}' param="agenda" id="ni_agenda">
+                            Agenda
+                        </li>
+                        <li data-jstree='{"icon" : "glyphicon glyphicon-cog"}' param="configuracion" id="ni_configuracion">
+                            Configuración
+                            <ul>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase", "selected":true, "disabled":true}' param="configuracion_perfil" id="ni_configuracion_perfil">
+                                    Perfil
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="configuracion_usuarios" id="ni_configuracion_usuarios">
+                                    Usuarios
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="configuracion_mensaje" id="ni_configuracion_mensaje">
+                                    Mensajes
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="configuracion_costo" id="ni_configuracion_costo">
+                                    Costo de envio
+                                </li>
+                                <li data-jstree='{"icon" : "glyphicon glyphicon-briefcase"}' param="configuracion_permisos" id="ni_configuracion_permisos">
+                                    Permisos
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="configuracion_usuarios">
+                <div class="row">
+                    <div class="col-md-6">
+                        <form id="form_lista_usuario" class="has-feedback">
+                            <h3 class="page-header">Agregar usuario
+                                <small onclick="tourAgregarUsuario();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                            </h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Nombre completo:</label>
+                                        <input type="text" class="form-control" name="nombre" maxlength="15" value="" required>
+                                        <span class="help-block">Este campo es obligatorio</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nombre de usuario:</label>
+                                        <input type="text" class="form-control" name="name" value="" required>
+                                        <span class="help-block">Este campo es obligatorio</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email:</label>
+                                        <input type="email" class="form-control" name="email" value="" required>
+                                        <span class="help-block">Este campo es obligatorio</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Permisos:</label>
+                                        <select class="form-control" name="permisos" required>
+                                            <option value="">Selecciona una opción</option>
+                                        </select>
+                                        <span class="help-block">Este campo es obligatorio</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group text-center">
+                                        <br>
+                                        <button class="btn btn-primary form-control" style="margin-top:5px;" type="submit"><span class="glyphicon glyphicon-save"></span> Crear usuario</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="page-header">Lista de usuarios
+                            <small onclick="tourListaUsuarios();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="configuracion_usuarios_lista" style="width:100%;background:white;">
+                                <thead>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>Usuario</td>
+                                        <td>Permiso</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div role="tabpanel" class="tab-pane" id="configuracion_mensaje">
+                <div class="alert alert-info">
+                    Escribe aquí los mensajes correspondientes que verán los clientes
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="page-header">Concretar venta</h3>
+                        <div class="form-group">
+                            <textarea class="form-control" id="concretarVenta" rows="8" placeholder="Escribe aquí el mensaje que verán tus clientes al concluir su compra"></textarea>
+                        </div>
+                        <div class="form-group text-right">
+                            <button class="btn btn-primary" onclick="actualizaCV();"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="page-header">Productos no disponibles</h3>
+                        <div class="form-group">
+                            <textarea class="form-control" id="noDisponible" rows="8" placeholder="Escribe aquí el mensaje que verán tus clientes cuando los productos no se encuentren disponibles para su venta por internet."></textarea>
+                        </div>
+                        <div class="form-group text-right">
+                            <button class="btn btn-primary" onclick="actualizaND();"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="configuracion_costo">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="page-header">Costo de envio
+                            <small onclick="tourCostoEnvio();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                        </h3>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="costoEnvio">
+                        </div>
+                        <div class="form-group text-right">
+                            <button class="btn btn-primary" onclick="actualizaCE();" id="btnCostoEnvio"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="page-header">Compra mínima <small><i>para envio gratuito</i></small>
+                            <small onclick="tourCompraMinima();" role="button"><i class="glyphicon glyphicon-question-sign"></i></small>
+                        </h3>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="compraMinima">
+                        </div>
+                        <div class="form-group text-right">
+                            <button class="btn btn-primary" onclick="actualizaCM();" id="btnCompraMinima"><span class="glyphicon glyphicon-save"></span> Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="configuracion_destacados">
+                <h3 class="page-header">Productos destacados</h3>
+                <p class="text-muted">Solo se pueden tener tres productos destacados al mismo tiempo</p>
+                <div class="alert alert-warning" role="alert">
+                    <span class="close">&times;</span>
+                    Al destacar un producto, reemplazará al tercer producto destacado que tengas.
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 row">
+                        <div class="col-sm-3 form-group">
+                            <label for="configuracion_autocomplete_productos" class="control-label">Selecciona un producto</label>
+                        </div>
+                        <div class="col-sm-5 form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="configuracion_autocomplete_productos" placeholder="Escribe para buscar">
+                                <input type="hidden" class="sr-only" id="conf_auto_prod_aux" value="">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <button class="btn btn-primary form-control" id="configuracion_btn_destacar" disabled>Destacar</button>
+                        </div>
+                    </div>
+                </div>
+                <h3>Destacados actualmente:</h3>
+                <table id="configuracion_destacados" class="table table-striped table-hover" width="100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Subcategoría</th>
+                        </tr>
+                    </thead>
+                    <tbody id="configuracion_tabla_destacados"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal_permisos" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center">Permisos - <span id="modal_nombrePermisos"></span></h4>
+            </div>
+            <div class="modal-body has-feedback">
+                <br>
+                <div id="modal_tree"></div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar sin guardar cambios</button>
+                <button type="button" class="btn btn-primary guardaPermisos">Cerrar y guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
