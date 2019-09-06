@@ -1,0 +1,121 @@
+#achat-chat{
+    width: 250px;
+    height: 329px;
+    position: fixed;
+    bottom: 0px;
+    z-index: 10000;
+    right: 5%;
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+}
+#achat-chat .btn-primary{
+    background: rgba(223,40,36,1);
+    background: -moz-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(223,40,36,1)), color-stop(100%, rgba(193,33,19,1)));
+    background: -webkit-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -o-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -ms-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: linear-gradient(to bottom, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#df2824', endColorstr='#c12113', GradientType=0 );
+    border-color: #8C0000;
+}
+#achat-chat .btn-primary:hover, #achat-chat .btn-primary:focus, #achat-chat .btn-primary.focus, #achat-chat .btn-primary:active, #achat-chat .btn-primary.active{
+    background: rgba(223,40,36,1);
+    background: -moz-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(223,40,36,1)), color-stop(100%, rgba(193,33,19,1)));
+    background: -webkit-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -o-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -ms-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: linear-gradient(to bottom, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#df2824', endColorstr='#c12113', GradientType=0 );
+    border-color: #9C0000;
+}
+#achat-cabecera{
+    cursor: pointer;
+    font-size: 90%;
+    text-align: center;
+    background: rgba(223,40,36,1);
+    background: -moz-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(223,40,36,1)), color-stop(100%, rgba(193,33,19,1)));
+    background: -webkit-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -o-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: -ms-linear-gradient(top, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    background: linear-gradient(to bottom, rgba(223,40,36,1) 0%, rgba(193,33,19,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#df2824', endColorstr='#c12113', GradientType=0 );
+    color: white;
+    padding: 10px 5px;
+    margin: 0px;
+}
+.achat-cuerpo{
+    background: #EDEEF1;
+    height: 257px;
+    overflow-x: auto;
+    border: 1px solid #B5BBC9;
+}
+.achat-mensaje{
+    width: 100%;
+    padding: 5px 6px 7px 5px;
+    padding-top: 10px;
+    padding-bottom: 8px;
+    clear: both;
+}
+    .achat-mensaje p{
+        font-size: 80%;
+        margin: 0px;
+        padding: 0px 5px 0px 5px;
+        border-radius: 5px;
+    }
+    .achat-mensaje:last-child p{
+        margin-bottom: 10px;
+    }
+.achat-yo{
+    float: right;
+    text-align: right;
+    width: auto;
+    max-width: 70%;
+    background-color: #e0edff;
+    border: 1px solid #bcc7d6;
+
+}
+.achat-el{
+    float: left;
+    width: auto;
+    max-width: 70%;
+    background-color: #fefefe;
+    border: 1px solid #d5d5d5;
+}
+#achat-mandaMensaje input{
+    font-size: 80%;
+    margin: 0px;
+    border-radius: 0px;
+    border-style: solid;
+}
+.achat-escondete{
+    height: 35px !important;
+}
+    .achat-escondete > div{
+        display: none;
+    }
+.achat-ocultamiento{
+    font-size: 90%;
+    height: 290px;
+    overflow: visible;
+}
+    .achat-ocultamiento #achat-instrucciones{
+        display: block;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 10px;
+    }
+#achat-instrucciones{
+    display: none;
+}
+    #achat-instrucciones label{
+        width: 100%;
+        font-size: 14px;
+    }
+    #achat-instrucciones .form-control{
+        padding-left: 10px;
+        height: 26px;
+        font-size: 13px;
+    }
