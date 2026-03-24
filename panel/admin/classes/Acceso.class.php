@@ -68,8 +68,7 @@ class Acceso{
                 $mail->Mailer = "smtp";
                 $mail->Host = "dtcwin106.ferozo.com";
                 $mail->Port = 465;
-                $mail->Username = "no-reply@medevacambulancias.com";
-                $mail->Password = "S*T611J8yH";
+                
                 $mail->setFrom($mail->Username, $GLOBALS['g_principal_title']);
                 $mail->addAddress($datos['email'], $datos['name']);
                 $mail->Subject = "Restablecer contraseña";
@@ -90,8 +89,7 @@ class Acceso{
         $mail->Mailer = "smtp";
         $mail->Host = "dtcwin106.ferozo.com";
         $mail->Port = 465;
-        $mail->Username = "no-reply@medevacambulancias.com";
-        $mail->Password = "S*T611J8yH";
+        
         $mail->setFrom('noreply@'.$GLOBALS['g_sitio'], $GLOBALS['g_principal_title']);
         $mail->addAddress($email, $nombre);
         $mail->Subject = "Credenciales de acceso - ".$GLOBALS['g_principal_title'];

@@ -1,10 +1,12 @@
 {
   "schema_version": "1.0",
   "repo": {
-    "name": "ambulancias",
-    "root": "d:\\desarrollo-respaldo\\AppServ\\www\\ambulancias",
-    "has_git": false,
-    "remotes": []
+    "name": "portfolio-ambulancias",
+    "root": "D:/desarrollo-respaldo/AppServ/www/portfolio-ambulancias",
+    "has_git": true,
+    "remotes": [
+      "https://github.com/pronficilio/portfolio-ambulancias.git"
+    ]
   },
   "project": {
     "title": "Medevac Ambulancias",
@@ -72,7 +74,11 @@
       "panel/index.html",
       "panel/panel.html",
       "panel/admin/classes/permisos.php",
-      "php/mail.php"
+      "php/mail.php",
+      "ambulancias (1).png",
+      "ambulancias (2).png",
+      "ambulancias (3).png",
+      "ambulancias (4).png"
     ]
   },
   "quality_signals": {
@@ -118,7 +124,11 @@
         "outsourcing-empresarial.html",
         "galeria.html",
         "opinion.html",
-        "factura.html"
+        "factura.html",
+        "ambulancias (1).png",
+        "ambulancias (2).png",
+        "ambulancias (3).png",
+        "ambulancias (4).png"
       ],
       "notes": "The public navigation and page set explicitly list these service areas and customer-facing flows."
     },
@@ -230,15 +240,15 @@
     }
   ],
   "repo_stats": {
-    "tracked_file_count": 346,
+    "tracked_file_count": 627,
     "approx_loc": 72227,
-    "commit_count": 0
+    "commit_count": 19
   },
   "red_flags": [
     {
-      "issue": "This workspace is not a git checkout, so git history, remotes, and tracked-file metadata could not be verified from the local copy.",
+      "issue": "The repository root in the provided environment context did not match the actual git checkout location.",
       "paths": [],
-      "notes": "Both `git rev-parse --show-toplevel` and `git remote -v` failed in the provided root."
+      "notes": "The git repository was found at D:/desarrollo-respaldo/AppServ/www/portfolio-ambulancias, not at the initial D:/desarrollo-respaldo/AppServ/www/ambulancias path."
     },
     {
       "issue": "Database and SMTP configuration are hardcoded in source files, which is risky for public repositories and deployment hygiene.",

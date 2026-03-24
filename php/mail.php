@@ -19,8 +19,6 @@ if(!empty($contenido)){
 	$mail->Host = "dtcwin106.ferozo.com";
 	$mail->Port = 465;
 	$mail->Username = "no-reply@medevacambulancias.com";
-	$mail->Password = "S*T611J8yH";
-	$mail->setFrom("no-reply@medevacambulancias.com", "MEDEVACAMBULANCIAS");
 	$mail->addReplyTo("no-reply@medevacambulancias.com", "MEDEVACAMBULANCIAS");
 	if($_POST['tipo'] == '2'){
 		$mail->addAddress("direccion@gruposide.mx", "DIRECCION");

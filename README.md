@@ -10,6 +10,22 @@ The public site is built as a multi-page HTML/CSS/JavaScript experience with AJA
 
 Repository-root screenshots such as `ambulancias (1).png` through `ambulancias (4).png` show the public homepage, gallery, and invoice-request flow.
 
+## Screenshots
+
+### Public Homepage
+
+![Public homepage](ambulancias%20(1).png)
+
+### Gallery
+
+![Gallery lightbox](ambulancias%20(2).png)
+
+![Gallery grid](ambulancias%20(3).png)
+
+### Invoice Request
+
+![Invoice request form](ambulancias%20(4).png)
+
 ## Key Features
 
 - Multi-page public website for emergency care, transfers, neonatal therapy, event coverage, medical consultation, training, corporate outsourcing, gallery, and client-facing informational pages.
@@ -74,3 +90,7 @@ Do not reuse embedded credentials from legacy code in a public deployment.
 - This is a legacy PHP codebase that still uses APIs such as `mysql_*`, `ereg/eregi`, and `get_magic_quotes_gpc`, so a modern PHP runtime will likely require compatibility work.
 - No CI workflow, package manifest, Docker setup, or automated test runner configuration was found in this copy of the project.
 - One admin include references `panel/admin/classes/usuarios.class.php`, but that file is not present in this workspace.
+
+## Contact
+
+Replace this section with your preferred public portfolio contact channel.
