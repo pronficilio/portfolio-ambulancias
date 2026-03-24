@@ -1,0 +1,269 @@
+{
+  "schema_version": "1.0",
+  "repo": {
+    "name": "ambulancias",
+    "root": "d:\\desarrollo-respaldo\\AppServ\\www\\ambulancias",
+    "has_git": false,
+    "remotes": []
+  },
+  "project": {
+    "title": "Medevac Ambulancias",
+    "one_liner": "Legacy PHP web application for Medevac Ambulancias, combining a public services website with an administrative sales, CRM, and inventory panel.",
+    "project_type": "web_app",
+    "status": "unknown",
+    "description": "The repository contains a public-facing multi-page website for ambulance and medical support services plus a password-protected admin panel for catalog management, customer records, carts, point-of-sale operations, scheduling, permissions, and live chat handling."
+  },
+  "tech_stack": {
+    "languages": [
+      "PHP",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "frontend": [
+      "Bootstrap",
+      "jQuery",
+      "DataTables",
+      "Select2",
+      "FullCalendar",
+      "jsTree",
+      "Intro.js",
+      "Toastr",
+      "Gritter"
+    ],
+    "backend": [
+      "Custom PHP",
+      "PHPMailer",
+      "PHPExcel"
+    ],
+    "datastores": [
+      "MySQL"
+    ],
+    "cloud": [],
+    "infra_devops": [],
+    "testing": [],
+    "tooling": [
+      "Google Analytics"
+    ]
+  },
+  "how_to_run": {
+    "prerequisites": [
+      "PHP-capable web server",
+      "MySQL database with the expected application tables",
+      "SMTP access for email-based features"
+    ],
+    "setup_steps": [
+      "This repository does not include a one-command local setup.",
+      "Serve the project from a PHP-capable web root so `index.html`, `php/`, `correo/`, `achat/`, and `panel/` are reachable.",
+      "Configure the database connection used by `panel/admin/classes/permisos.php` before using the admin panel.",
+      "Open `index.html` for the public site or `panel/index.html` for the admin login once backend dependencies are available."
+    ],
+    "dev_command": "unknown",
+    "build_command": "unknown",
+    "test_commands": [],
+    "lint_commands": [],
+    "docker": {
+      "has_dockerfile": false,
+      "has_compose": false,
+      "commands": []
+    },
+    "docs_references": [
+      "index.html",
+      "panel/index.html",
+      "panel/panel.html",
+      "panel/admin/classes/permisos.php",
+      "php/mail.php"
+    ]
+  },
+  "quality_signals": {
+    "ci": {
+      "present": false,
+      "providers": [],
+      "config_paths": []
+    },
+    "linting": {
+      "present": false,
+      "tools": [],
+      "evidence_paths": []
+    },
+    "formatting": {
+      "present": false,
+      "tools": [],
+      "evidence_paths": []
+    },
+    "type_checking": {
+      "present": false,
+      "tools": [],
+      "evidence_paths": []
+    },
+    "tests": {
+      "present": false,
+      "levels": [],
+      "frameworks": [],
+      "evidence_paths": []
+    }
+  },
+  "cv_bullets": [
+    {
+      "bullet": "Built a multi-page public website for an ambulance-services business, covering emergency care, transfers, neonatal therapy, event coverage, medical consultation, training, outsourcing, gallery, customer feedback, and invoice requests.",
+      "confidence": "high",
+      "evidence_paths": [
+        "index.html",
+        "emergencias.html",
+        "traslados.html",
+        "terapia-neonatal.html",
+        "cobertura-de-eventos.html",
+        "consulta-medica.html",
+        "capacitacion.html",
+        "outsourcing-empresarial.html",
+        "galeria.html",
+        "opinion.html",
+        "factura.html"
+      ],
+      "notes": "The public navigation and page set explicitly list these service areas and customer-facing flows."
+    },
+    {
+      "bullet": "Implemented an embedded website chat that can open live conversations, poll for new messages, and fall back to deferred inquiry capture when operators are unavailable.",
+      "confidence": "high",
+      "evidence_paths": [
+        "achat/achat.js",
+        "achat/ajax/achatDisponible.json.php",
+        "achat/ajax/iniciaChat.php",
+        "panel/admin/classes/Achat.class.php",
+        "panel/achat/ajaxAdmin/dameChats.php"
+      ],
+      "notes": "Availability checks, chat creation, message polling, and admin-side retrieval are all present in code."
+    },
+    {
+      "bullet": "Built AJAX-backed invoice-request and feedback flows that submit structured form data to PHP mail handlers.",
+      "confidence": "high",
+      "evidence_paths": [
+        "factura.html",
+        "opinion.html",
+        "php/mail.php"
+      ],
+      "notes": "Both public forms post to the same mail endpoint, which changes subject/recipient behavior based on the payload."
+    },
+    {
+      "bullet": "Delivered a role-aware admin panel with login, session tracking, and permission-gated tabs and actions.",
+      "confidence": "high",
+      "evidence_paths": [
+        "panel/index.html",
+        "panel/ajax/acceso/login.php",
+        "panel/admin/classes/Acceso.class.php",
+        "panel/js/permisos.js",
+        "panel/tabs/configuracion.html"
+      ],
+      "notes": "The admin area includes credential-based login, session persistence, and a jsTree-driven permission model."
+    },
+    {
+      "bullet": "Created catalog and product-management workflows spanning categories, nested subcategories, discounts, suppliers, product metadata, attachments, images, and inventory thresholds.",
+      "confidence": "high",
+      "evidence_paths": [
+        "panel/tabs/catalogos.html",
+        "panel/tabs/productos.html",
+        "panel/admin/classes/Producto.class.php",
+        "panel/admin/classes/Proveedores.class.php",
+        "panel/admin/classes/Archivo.class.php",
+        "panel/ajax/archivo/agregarArchivos.php"
+      ],
+      "notes": "The UI and backend classes explicitly support these entities and related upload/linking flows."
+    },
+    {
+      "bullet": "Implemented cart and point-of-sale flows with barcode entry, mixed payment methods, invoice flags, saved/open carts, and sales reporting.",
+      "confidence": "high",
+      "evidence_paths": [
+        "panel/tabs/punto-venta.html",
+        "panel/tabs/carritos.html",
+        "panel/tabs/cuenta.html",
+        "panel/js/punto-venta.js",
+        "panel/ajax/barcode/finalizaPuntoVenta.json.php",
+        "panel/admin/classes/Carrito.class.php"
+      ],
+      "notes": "The panel exposes dedicated POS, cart, and account-balance flows, and backend code validates inventory before finalizing sales."
+    },
+    {
+      "bullet": "Built CRM-oriented customer workflows covering profile capture, multiple phone numbers, billing and shipping data, follow-up calls, and Excel-based imports.",
+      "confidence": "high",
+      "evidence_paths": [
+        "panel/tabs/clientes.php",
+        "panel/admin/classes/Cliente.class.php",
+        "panel/admin/classes/Llamada.class.php",
+        "panel/ajax/cliente/creaLlamada.php",
+        "panel/ajax/cliente/importaExcel.json.php",
+        "panel/xls/esqueleto_clientes.xls"
+      ],
+      "notes": "Customer forms, call logging, and spreadsheet ingestion are explicitly implemented."
+    },
+    {
+      "bullet": "Added agenda and calendar features for customer-related tasks, including pending/completed states and in-app reminders.",
+      "confidence": "high",
+      "evidence_paths": [
+        "panel/tabs/agenda.html",
+        "panel/admin/classes/Agenda.class.php",
+        "panel/panel.html",
+        "panel/js/main.js",
+        "panel/ajax/agenda/actividades.json.php"
+      ],
+      "notes": "The panel loads a FullCalendar view and uses agenda endpoints plus reminder notifications for scheduled activity."
+    },
+    {
+      "bullet": "Localized the admin experience for Spanish-speaking operators, including Spanish language packs and Spanish-first UI copy across dashboards and forms.",
+      "confidence": "high",
+      "evidence_paths": [
+        "panel/panel.html",
+        "panel/locales/datatable.es.json",
+        "panel/fullcalendar/lang/es.js",
+        "panel/select2/js/i18n/es.js"
+      ],
+      "notes": "The admin shell loads Spanish locale files and the application text is written in Spanish."
+    },
+    {
+      "bullet": "Implemented supplier onboarding with tokenized access links and category-assignment workflows inside the admin panel.",
+      "confidence": "high",
+      "evidence_paths": [
+        "panel/tabs/catalogos.html",
+        "panel/admin/classes/Proveedores.class.php",
+        "panel/ajax/proveedores/enviarAcceso.json.php"
+      ],
+      "notes": "Supplier records can be created, linked to categories, and emailed an embedded-access token."
+    }
+  ],
+  "repo_stats": {
+    "tracked_file_count": 346,
+    "approx_loc": 72227,
+    "commit_count": 0
+  },
+  "red_flags": [
+    {
+      "issue": "This workspace is not a git checkout, so git history, remotes, and tracked-file metadata could not be verified from the local copy.",
+      "paths": [],
+      "notes": "Both `git rev-parse --show-toplevel` and `git remote -v` failed in the provided root."
+    },
+    {
+      "issue": "Database and SMTP configuration are hardcoded in source files, which is risky for public repositories and deployment hygiene.",
+      "paths": [
+        "panel/admin/classes/permisos.php",
+        "panel/admin/classes/Acceso.class.php",
+        "php/mail.php",
+        "achat/ajax/iniciaChat.php"
+      ],
+      "notes": "Secret values were intentionally not copied into the README or this JSON output."
+    },
+    {
+      "issue": "The codebase relies on deprecated PHP APIs such as `mysql_*`, `ereg/eregi`, and `get_magic_quotes_gpc`, which will require modernization on current PHP versions.",
+      "paths": [
+        "panel/admin/classes/conexion.php",
+        "panel/admin/classes/ValidacionFormulario.php"
+      ],
+      "notes": "These APIs were removed from modern PHP releases."
+    },
+    {
+      "issue": "One admin tab references a missing class file in this workspace.",
+      "paths": [
+        "panel/tabs/clientes.php"
+      ],
+      "notes": "`panel/tabs/clientes.php` includes `panel/admin/classes/usuarios.class.php`, but that file is not present in this tree."
+    }
+  ]
+}
