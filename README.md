@@ -36,7 +36,6 @@ Repository-root screenshots such as `ambulancias (1).png` through `ambulancias (
 - `achat/` contains the public chat widget and its PHP endpoints.
 - `panel/` contains the admin login, dashboard shell, tab content, AJAX endpoints, business classes, and bundled UI libraries.
 - `panel/admin/classes/` holds the main business logic for access control, customers, products, carts, suppliers, files, calls, agenda items, and chat.
-- `Site-V-1.0/` and `test/` appear to be alternate or older site copies rather than automated test suites.
 
 ## Getting Started
 
@@ -75,7 +74,3 @@ Do not reuse embedded credentials from legacy code in a public deployment.
 - This is a legacy PHP codebase that still uses APIs such as `mysql_*`, `ereg/eregi`, and `get_magic_quotes_gpc`, so a modern PHP runtime will likely require compatibility work.
 - No CI workflow, package manifest, Docker setup, or automated test runner configuration was found in this copy of the project.
 - One admin include references `panel/admin/classes/usuarios.class.php`, but that file is not present in this workspace.
-
-## Contact
-
-Replace this section with your preferred public portfolio contact channel.
