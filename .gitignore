@@ -1,0 +1,9 @@
+# Legacy secrets / local junk
+*permisos*
+*conexion*
+*.zip
+*.rar
+*.sql
+*.txt
+.DS_Store
+Thumbs.db
