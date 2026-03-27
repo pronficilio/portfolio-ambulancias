@@ -83,14 +83,9 @@ Database, mail, and site-level settings are embedded directly in PHP files such 
 - `php/mail.php`
 - `achat/ajax/iniciaChat.php`
 
-Do not reuse embedded credentials from legacy code in a public deployment.
 
 ## Notes / Trade-offs
 
 - This is a legacy PHP codebase that still uses APIs such as `mysql_*`, `ereg/eregi`, and `get_magic_quotes_gpc`, so a modern PHP runtime will likely require compatibility work.
 - No CI workflow, package manifest, Docker setup, or automated test runner configuration was found in this copy of the project.
 - One admin include references `panel/admin/classes/usuarios.class.php`, but that file is not present in this workspace.
-
-## Contact
-
-Replace this section with your preferred public portfolio contact channel.
